@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import { signOutAPI } from "../actions";
 
 const Header = (props) => {
@@ -56,7 +56,7 @@ const Header = (props) => {
                 {props.user && props.user.photoURL ? (
                   <img src={props.user.photoURL} alt="" />
                 ) : (
-                  <img src="/images/user.svg" alt="" />
+                  <img src="/images/user.svg" />
                 )}
                 <span>
                   Me <img src="/images/down-icon.svg" alt="" />
@@ -65,16 +65,16 @@ const Header = (props) => {
               <SignOut onClick={() => props.signOut()}>
                 <a>Sign Out</a>
               </SignOut>
-              <Work>
-                <a>
-                  <img src="/images/nav-work.svg" alt="" />
-                  <span>
-                    Work
-                    <img src="/images/down-icon.svg" alt="" />
-                  </span>
-                </a>
-              </Work>
             </User>
+            <Work>
+              <a>
+                <img src="/images/nav-work.svg" alt="" />
+                <span>
+                  Work
+                  <img src="/images/down-icon.svg" alt="" />
+                </span>
+              </a>
+            </Work>
           </NavListWrap>
         </Nav>
       </Content>
@@ -83,12 +83,12 @@ const Header = (props) => {
 };
 
 const Container = styled.div`
-  background-color: white;
+  background-color: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   left: 0;
   padding: 0 24px;
-  position: fixed;
   top: 0;
+  position: fixed;
   width: 100vw;
   z-index: 100;
 `;
@@ -151,7 +151,7 @@ const Nav = styled.nav`
     position: fixed;
     left: 0;
     bottom: 0;
-    background: white;
+    background: #ffffff;
     width: 100%;
   }
 `;
@@ -164,7 +164,7 @@ const NavListWrap = styled.ul`
     span:after {
       content: "";
       transform: scaleX(1);
-      border-bottom: 2px solid var(--white, #fff);
+      border-bottom: 2px solid var(--white, #ffffff);
       bottom: 0;
       left: 0;
       position: absolute;
@@ -187,8 +187,8 @@ const NavList = styled.li`
     font-weight: 400;
     justify-content: center;
     line-height: 1.5;
-    min-height: 52px;
-    min-width: 80px;
+    min-height: 42px;
+    min-width: 88px;
     position: relative;
     text-decoration: none;
     span {
@@ -211,11 +211,13 @@ const NavList = styled.li`
 `;
 
 const SignOut = styled.div`
+  cursor: pointer;
   position: absolute;
   top: 45px;
-  background: white;
+  background: #ffffff;
   border-radius: 0 0 5px 5px;
   width: 100px;
+  box-shadow: 2px 3px 5px -2px rgba(110, 104, 104, 0.75);
   height: 40px;
   font-size: 16px;
   transition-duration: 167ms;
@@ -225,18 +227,25 @@ const SignOut = styled.div`
 
 const User = styled(NavList)`
   a > svg {
-    width: 24px;
-    border-radius: 50%;
-  }
-  a > img {
+    padding-top: 5px;
     width: 24px;
     height: 24px;
     border-radius: 50%;
   }
+
+  a > img {
+    width: 24px;
+    height: 24px;
+    padding-top: 5px;
+    border-radius: 50%;
+  }
+
   span {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
+
   &:hover {
     ${SignOut} {
       align-items: center;
@@ -253,8 +262,8 @@ const Work = styled(User)`
 const mapStateToProps = (state) => {
   return {
     user: state.userState.user,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   signOut: () => dispatch(signOutAPI()),
